@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Categories</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+    .container { width: 90%; margin: auto; max-width: 1200px; }
+    .category { margin-top: 20px; }
+    .category h2 { color: #333; font-size: 24px; }
+    .recipe-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .recipe-item { background-color: white; padding: 10px; border: 1px solid #ddd; 
+                   border-radius: 5px; width: 150px; text-align: center; 
+                   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); }
+    .recipe-item:hover { box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3); }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="recipeCategories"></div>
+
+  <script>
+    const categories = {
+      "Lunch": [
+        { name: "Amala and Gbegiri", link: "recipes/lunch/amala-and-gbegiri.html" },
+        { name: "Rice and Fried Stew", link: "recipes/lunch/rice-and-fried-stew.html" },
+        { name: "Rice and Beans with Eggs", link: "recipes/lunch/rice-and-beans-with-eggs.html" },
+        { name: "Jollof Rice with Chicken", link: "recipes/lunch/jollof-rice-with-chicken.html" },
+        { name: "Fried Rice", link: "recipes/lunch/fried-rice.html" },
+        { name: "Ewedu", link: "recipes/lunch/ewedu.html" },
+        { name: "Fish Stew", link: "recipes/lunch/fish-stew.html" }
+      ],
+      "Dinner": [
+        { name: "Spaghetti", link: "recipes/dinner/spaghetti.html" },
+        { name: "Peppersoup", link: "recipes/dinner/peppersoup.html" },
+        { name: "Vegetables", link: "recipes/dinner/vegetables.html" }
+      ],
+      "Snacks or Side Dishes": [
+        { name: "Moimoi", link: "recipes/snacks/moimoi.html" }
+      ],
+      "Quick Meals": [
+        { name: "Noodles", link: "recipes/quick-meals/noodles.html" }
+      ]
+    };
+
+    function renderCategories() {
+      const container = document.getElementById('recipeCategories');
+      
+      for (let category in categories) {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.classList.add('category');
+
+        const categoryTitle = document.createElement('h2');
+        categoryTitle.textContent = category;
+        categoryDiv.appendChild(categoryTitle);
+
+        const recipeList = document.createElement('div');
+        recipeList.classList.add('recipe-list');
+
+        categories[category].forEach(recipe => {
+          const recipeItem = document.createElement('div');
+          recipeItem.classList.add('recipe-item');
+          
+          const recipeLink = document.createElement('a');
+          recipeLink.href = recipe.link;
+          recipeLink.textContent = recipe.name;
+          recipeLink.style.textDecoration = "none";
+          recipeLink.style.color = "inherit";
+          
+          recipeItem.appendChild(recipeLink);
+          recipeList.appendChild(recipeItem);
+        });
+
+        categoryDiv.appendChild(recipeList);
+        container.appendChild(categoryDiv);
+      }
+    }
+
+    window.onload = renderCategories;
+  </script>
+
+</body>
+</html>
